@@ -34,21 +34,30 @@ export function ProductCard({ product }) {
       <p className="mt-4 flex-1 text-sm leading-6 text-[var(--ink-soft)]">“{product.description}”</p>
       <div className="mt-6 flex flex-wrap items-center gap-3">
         {product.websiteUrl ? (
-          <a
-            href={product.websiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#155eef] to-[#2563eb] px-5 py-2.5 text-xs font-bold tracking-widest text-white shadow-[0_8px_30px_-8px_rgba(21,94,239,0.8)] transition hover:shadow-[0_8px_36px_-6px_rgba(56,189,248,0.7)]"
+          <>
+            <a
+              href={product.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#155eef] to-[#2563eb] px-5 py-2.5 text-xs font-bold tracking-widest text-white shadow-[0_8px_30px_-8px_rgba(21,94,239,0.8)] transition hover:shadow-[0_8px_36px_-6px_rgba(56,189,248,0.7)]"
+            >
+              {product.ctaText.toUpperCase()} <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+            <Link
+              href={`/products/${product.slug}`}
+              className="inline-flex items-center gap-2 text-sm font-bold tracking-widest text-[#38bdf8]"
+            >
+              DETAILS <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+          </>
+        ) : (
+          <Link
+            href={`/products/${product.slug}`}
+            className="inline-flex items-center gap-2 text-sm font-bold tracking-widest text-[#38bdf8]"
           >
-            {product.ctaText.toUpperCase()} <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        ) : null}
-        <Link
-          href={`/products/${product.slug}`}
-          className="inline-flex items-center gap-2 text-sm font-bold tracking-widest text-[#38bdf8]"
-        >
-          OPEN PRODUCT <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </Link>
+            OPEN PRODUCT <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
+        )}
       </div>
     </article>
   );
