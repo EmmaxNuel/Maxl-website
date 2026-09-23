@@ -11,8 +11,9 @@ export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }) {
-  const p = getProduct(params.slug);
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const p = getProduct(slug);
   if (!p) return { title: "Product not found" };
   return {
     title: p.name,
@@ -22,8 +23,9 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function ProductPage({ params }) {
-  const product = getProduct(params.slug);
+export default async function ProductPage({ params }) {
+  const { slug } = await params;
+  const product = getProduct(slug);
   if (!product) notFound();
   const Icon = PRODUCT_ICONS[product.icon] || PRODUCT_ICONS.clapperboard;
   const others = PRODUCTS.filter((p) => p.slug !== product.slug);
